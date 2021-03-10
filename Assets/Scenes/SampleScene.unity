@@ -338,7 +338,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!1001 &247538864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -352,15 +352,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.718617
+      value: 2.7186
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.7472997e-18
+      value: 1.5611
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.93
+      value: 7.1961
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -396,15 +396,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.40095893
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.40095893
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.40095893
       objectReference: {fileID: 0}
     - target: {fileID: 19836752, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -450,6 +450,10 @@ PrefabInstance:
       propertyPath: scalingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19807740, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 19990304, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -473,6 +477,10 @@ PrefabInstance:
     - target: {fileID: 457024, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.65739
+      objectReference: {fileID: 0}
+    - target: {fileID: 19806176, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
@@ -943,7 +951,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!1 &683940005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1077,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!1 &687566742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1296,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!54 &740662855
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1414,7 +1422,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 400
   forceAdd: 0
-  sizeAdd: 0.5
+  sizeAdd: 0.01
 --- !u!54 &758855764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1734,7 +1742,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.24643488, y: -0.00000007776544, z: 0.00000002703746, w: 0.96915936}
-  m_LocalPosition: {x: -2.6, y: 45.2, z: -40.20001}
+  m_LocalPosition: {x: 1.01, y: 19.5, z: -18.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2670,7 +2678,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!54 &1169370041
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3148,7 +3156,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!1 &1523110122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3229,7 +3237,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!54 &1602678636
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3430,7 +3438,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!1 &1732418017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3556,7 +3564,7 @@ MonoBehaviour:
   taken: 0
   forceCap: 100
   forceAdd: 0
-  sizeAdd: 0.1
+  sizeAdd: 0.01
 --- !u!1 &1740963179
 GameObject:
   m_ObjectHideFlags: 0
@@ -3831,9 +3839,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tornadoCenter: {fileID: 1523110123}
-  pullForce: 300
+  pullForce: 150
   refreshRate: 2
   playerBody: {fileID: 1998429757}
+  cam: {fileID: 963194227}
 --- !u!135 &1998429752
 SphereCollider:
   m_ObjectHideFlags: 0

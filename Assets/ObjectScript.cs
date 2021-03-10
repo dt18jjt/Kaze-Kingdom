@@ -5,9 +5,7 @@ using UnityEngine;
 public class ObjectScript : MonoBehaviour
 {
     public bool taken;
-    public float forceCap;
-    public float forceAdd;
-    public float sizeAdd;
+    public float forceCap, forceAdd, sizeAdd;
     // Start is called before the first frame update
     void Start()
     {

@@ -5,11 +5,11 @@ using UnityEngine;
 public class Tornado : MonoBehaviour
 {
     public Transform tornadoCenter;
-    public float pullForce;
-    public float refreshRate;
+    public float pullForce, refreshRate;
     [SerializeField]
     private Rigidbody playerBody;
     private Vector3 inputVector;
+    public Camera cam;
     private void Start()
     {
         playerBody = GetComponent<Rigidbody>();
@@ -18,7 +18,7 @@ public class Tornado : MonoBehaviour
     }
     private void Update()
     {
-        inputVector = new Vector3(Input.GetAxis("Horizontal")*10f, -playerBody.velocity.y, Input.GetAxis("Vertical")*10f);
+        inputVector = new Vector3(Input.GetAxis("Horizontal")*5f, -playerBody.velocity.y, Input.GetAxis("Vertical")*5f);
         transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
         
     }
@@ -41,6 +41,8 @@ public class Tornado : MonoBehaviour
                 ob.taken = true;
                 //ob.GetComponent<BoxCollider>().isTrigger = true;
                 pullForce += 10;
+                //cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y+1, cam.transform.position.z + 1);
+                cam.fieldOfView += 1;
                 transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;
