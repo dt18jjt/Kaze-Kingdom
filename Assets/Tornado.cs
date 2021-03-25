@@ -42,7 +42,7 @@ public class Tornado : MonoBehaviour
                 //ob.GetComponent<BoxCollider>().isTrigger = true;
                 pullForce += 10;
                 //cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y+1, cam.transform.position.z + 1);
-                cam.fieldOfView += 1;
+                //cam.fieldOfView += 1;
                 transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;
