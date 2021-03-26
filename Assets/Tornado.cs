@@ -46,7 +46,7 @@ public class Tornado : MonoBehaviour
         ObjectScript ob = other.gameObject.GetComponent<ObjectScript>();
         if (other.CompareTag("OBJ"))
         {
-            if (ob.forceCap <= pullForce && !ob.taken)
+            if (ob.forceCap <= pullForce && !ob.taken && ob.exitCooldown <= 0)
             {
                 StartCoroutine(pullObject(other, true));
                 global.comboOn = true;
@@ -66,7 +66,15 @@ public class Tornado : MonoBehaviour
         }
         if (other.CompareTag("Shock"))
         {
-
+            int rand = Random.Range(0, objects.Count);
+            //ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>();
+            GameObject exitOb = objects[rand].gameObject;
+            //exitOb.taken = false;
+            //exitOb.exitCooldown = 3f;
+            objects.RemoveAt(rand);
+            Destroy(exitOb);
+            Debug.Log("T");
+            Destroy(other);
         }
         
     }
