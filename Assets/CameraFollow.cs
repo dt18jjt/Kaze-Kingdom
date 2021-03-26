@@ -27,13 +27,11 @@ public class CameraFollow : MonoBehaviour
     }
     void CamControl()
     {
+        //camera rotates left
         if(Input.GetAxis("Mouse X") < 0)
-        {
             Rotator.Rotate(0, -5, 0);
-        }
+        //camera rotates right
         if (Input.GetAxis("Mouse X") > 0)
-        {
             Rotator.Rotate(0, 5, 0);
-        }
     }
 }

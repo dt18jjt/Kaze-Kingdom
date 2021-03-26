@@ -10,6 +10,9 @@ public class Tornado : MonoBehaviour
     private Rigidbody playerBody;
     private Vector3 inputVector;
     public Camera cam;
+    public Transform camPos;
+    public List<GameObject> objects = new List<GameObject>();
+    Vector2 inputs;
     private void Start()
     {
         playerBody = GetComponent<Rigidbody>();
@@ -18,8 +21,19 @@ public class Tornado : MonoBehaviour
     }
     private void Update()
     {
-        inputVector = new Vector3(Input.GetAxis("Horizontal")*5f, -playerBody.velocity.y, Input.GetAxis("Vertical")*5f);
-        transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+        //setting input values
+        inputs = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        inputs = Vector2.ClampMagnitude(inputs, 1);
+        //setting camera postion values
+        Vector3 camF = camPos.forward;
+        Vector3 camR = camPos.forward;
+        camF.y = 0;
+        camR.y = 0;
+        camF = camF.normalized;
+        camR = camR.normalized;
+        //inputVector = new Vector3(inputs.x*5f, -playerBody.velocity.y, inputs.y*5f);
+        //transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
+        transform.position += (camF * inputs.y + camR * inputs.x) * Time.deltaTime * 5;
         
     }
     private void FixedUpdate()
@@ -30,7 +44,7 @@ public class Tornado : MonoBehaviour
     {
         Global global = GameObject.Find("G").GetComponent<Global>();
         ObjectScript ob = other.gameObject.GetComponent<ObjectScript>();
-        if (other.gameObject.tag == "OBJ")
+        if (other.CompareTag("OBJ"))
         {
             if (ob.forceCap <= pullForce && !ob.taken)
             {
@@ -46,8 +60,13 @@ public class Tornado : MonoBehaviour
                 transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;
+                objects.Add(ob.gameObject);
             }
                 
+        }
+        if (other.CompareTag("Shock"))
+        {
+
         }
         
     }
