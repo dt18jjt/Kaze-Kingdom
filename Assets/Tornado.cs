@@ -66,13 +66,12 @@ public class Tornado : MonoBehaviour
         if (other.CompareTag("Shock"))
         {
             int rand = Random.Range(0, objects.Count);
-            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>();
-            //GameObject exitOb = objects[rand].gameObject;
-            exitOb.taken = false;
-            exitOb.exitCooldown = 3f;
-            objects.RemoveAt(rand);
-            //Destroy(exitOb);
-            Debug.Log("T");
+            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
+            List<int> randFlyX = new List<int>(-20, 20);
+            exitOb.taken = false; // object is no longer taken
+            exitOb.exitCooldown = 3f; // cooldown before being picked up again
+            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(Random.Range(-15, 15),0 , Random.Range(-15, 15)); // object flys away
+            objects.RemoveAt(rand); // remove object from list
             Destroy(other.gameObject);
         }
         
