@@ -31,8 +31,6 @@ public class Tornado : MonoBehaviour
         camR.y = 0;
         camF = camF.normalized;
         camR = camR.normalized;
-        //inputVector = new Vector3(inputs.x*5f, -playerBody.velocity.y, inputs.y*5f);
-        //transform.LookAt(transform.position + new Vector3(inputVector.x, 0, inputVector.z));
         transform.position += (camF * inputs.y + camR * inputs.x) * Time.deltaTime * 5;
         
     }
@@ -48,6 +46,7 @@ public class Tornado : MonoBehaviour
         {
             if (ob.forceCap <= pullForce && !ob.taken && ob.exitCooldown <= 0)
             {
+                objects.Add(other.gameObject);
                 StartCoroutine(pullObject(other, true));
                 global.comboOn = true;
                 global.comboNum += 1;
@@ -60,19 +59,19 @@ public class Tornado : MonoBehaviour
                 transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                objects.Add(ob.gameObject);
+                
             }
                 
         }
         if (other.CompareTag("Shock"))
         {
             int rand = Random.Range(0, objects.Count);
-            //ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>();
-            GameObject exitOb = objects[rand].gameObject;
-            //exitOb.taken = false;
-            //exitOb.exitCooldown = 3f;
+            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>();
+            //GameObject exitOb = objects[rand].gameObject;
+            exitOb.taken = false;
+            exitOb.exitCooldown = 3f;
             objects.RemoveAt(rand);
-            Destroy(exitOb);
+            //Destroy(exitOb);
             Debug.Log("T");
             Destroy(other);
         }
@@ -94,7 +93,11 @@ public class Tornado : MonoBehaviour
         if (shouldPull)
         {
             Vector3 forceDir = tornadoCenter.position - x.transform.position;
-            x.GetComponent<Rigidbody>().AddForce(forceDir.normalized * pullForce * Time.deltaTime);
+            foreach(GameObject i in objects)
+            {
+                i.GetComponent<Rigidbody>().AddForce(forceDir.normalized * pullForce * Time.deltaTime);
+            }
+            //x.GetComponent<Rigidbody>().AddForce(forceDir.normalized * pullForce * Time.deltaTime);
             yield return refreshRate;
             StartCoroutine(pullObject(x, shouldPull));
         }
