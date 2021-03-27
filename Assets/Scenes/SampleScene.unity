@@ -340,6 +340,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!1001 &247538864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -357,11 +358,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.1961
+      value: 7.2374
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -397,15 +398,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.40095893
+      value: 0.43467957
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.40095893
+      value: 0.43467957
       objectReference: {fileID: 0}
     - target: {fileID: 458636, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.40095893
+      value: 0.43467957
       objectReference: {fileID: 0}
     - target: {fileID: 19836752, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -466,7 +467,7 @@ PrefabInstance:
     - target: {fileID: 19942818, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dea41af3d4536ac4080332ae1e0d6fd1, type: 2}
+      objectReference: {fileID: 2100000, guid: 25bd086592405bc4b85fb8280fe53759, type: 2}
     - target: {fileID: 19942818, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
       propertyPath: m_UseCustomVertexStreams
       value: 1
@@ -487,6 +488,10 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 19979540, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28a511f0cfb10174f91f9888abdaf6f7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d18380a6098943a4a879b5a0f3826c9d, type: 3}
 --- !u!1 &299601814
@@ -958,6 +963,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!1 &683940005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,6 +1091,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!1 &687566742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,6 +1312,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!54 &740662855
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1432,6 +1440,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!54 &758855764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2087,6 +2096,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.5
   exitCooldown: 0
+  mass: 0
 --- !u!1 &1037995719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,6 +2704,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!54 &1169370041
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3173,6 +3184,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!1 &1523110122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3255,6 +3267,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!54 &1602678636
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3457,6 +3470,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!1 &1732418017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,6 +3598,7 @@ MonoBehaviour:
   forceAdd: 0
   sizeAdd: 0.01
   exitCooldown: 0
+  mass: 0
 --- !u!1 &1740963179
 GameObject:
   m_ObjectHideFlags: 0

@@ -73,7 +73,7 @@ public class Tornado : MonoBehaviour
             objects.RemoveAt(rand);
             //Destroy(exitOb);
             Debug.Log("T");
-            Destroy(other);
+            Destroy(other.gameObject);
         }
         
     }
@@ -92,9 +92,10 @@ public class Tornado : MonoBehaviour
     {
         if (shouldPull)
         {
-            Vector3 forceDir = tornadoCenter.position - x.transform.position;
+            //Vector3 forceDir = tornadoCenter.position - x.transform.position;
             foreach(GameObject i in objects)
             {
+                Vector3 forceDir = tornadoCenter.position - i.transform.position;
                 i.GetComponent<Rigidbody>().AddForce(forceDir.normalized * pullForce * Time.deltaTime);
             }
             //x.GetComponent<Rigidbody>().AddForce(forceDir.normalized * pullForce * Time.deltaTime);

@@ -18,14 +18,16 @@ public class ObjectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rigidbody.mass = (exitCooldown > 0) ?  100 : 1;
         if (exitCooldown > 0)
+        {
             exitCooldown -= Time.deltaTime;
+            rigidbody.AddForce(0, -15, 0);
+        }
         if (taken)
         {
-            Vector3 randPos = new Vector3(Random.Range(center.position.x - 10, center.position.x + 10), Random.Range(center.position.y - 5, center.position.y + 5),
+            Vector3 randPos = new Vector3(Random.Range(center.position.x - 10, center.position.x + 10), Random.Range(center.position.y, center.position.y + 5),
                 Random.Range(center.position.z - 10, center.position.z + 10));
-            if(Vector3.Distance(gameObject.transform.position, center.position) > 30)
+            if(Vector3.Distance(gameObject.transform.position, center.position) > 10)
             {
                 gameObject.transform.position = randPos;
             }
