@@ -7,16 +7,12 @@ public class Tornado : MonoBehaviour
     public Transform tornadoCenter;
     public float pullForce, refreshRate;
     [SerializeField]
-    private Rigidbody playerBody;
-    private Vector3 inputVector;
     public Camera cam;
     public Transform camPos;
     public List<GameObject> objects = new List<GameObject>();
     Vector2 inputs;
     private void Start()
     {
-        playerBody = GetComponent<Rigidbody>();
-
         
     }
     private void Update()
@@ -33,10 +29,6 @@ public class Tornado : MonoBehaviour
         camR = camR.normalized;
         transform.position += (camF * inputs.y + camR * inputs.x) * Time.deltaTime * 5;
         
-    }
-    private void FixedUpdate()
-    {
-        playerBody.velocity = inputVector;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -67,10 +59,12 @@ public class Tornado : MonoBehaviour
         {
             int rand = Random.Range(0, objects.Count);
             ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
-            List<int> randFlyX = new List<int>(-20, 20);
+            List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
+            int randX = randFlyList[Random.Range(0, randFlyList.Count)];
+            int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
             exitOb.taken = false; // object is no longer taken
             exitOb.exitCooldown = 3f; // cooldown before being picked up again
-            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(Random.Range(-15, 15),0 , Random.Range(-15, 15)); // object flys away
+            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
             objects.RemoveAt(rand); // remove object from list
             Destroy(other.gameObject);
         }
@@ -80,10 +74,7 @@ public class Tornado : MonoBehaviour
     {
         if (other.gameObject.tag == "OBJ")
         {
-            //ObjectScript ob = other.gameObject.GetComponent<ObjectScript>();
             StartCoroutine(pullObject(other, false));            
-            //if (ob.forceCap <= pullForce && !ob.taken)
-               
         }
         
     }
@@ -91,6 +82,7 @@ public class Tornado : MonoBehaviour
     {
         if (shouldPull)
         {
+            //pull each object in object list
             //Vector3 forceDir = tornadoCenter.position - x.transform.position;
             foreach(GameObject i in objects)
             {
