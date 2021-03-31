@@ -5,7 +5,8 @@ using UnityEngine;
 public class Tornado : MonoBehaviour
 {
     public Transform tornadoCenter;
-    public float pullForce, refreshRate;
+    public float pullForce, refreshRate, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f;
+    int reverseNum, speed;
     [SerializeField]
     public Camera cam;
     public Transform camPos;
@@ -13,12 +14,13 @@ public class Tornado : MonoBehaviour
     Vector2 inputs;
     private void Start()
     {
-        
+        reverseNum = 1;
+        speed = 5;
     }
     private void Update()
     {
         //setting input values
-        inputs = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        inputs = new Vector2(Input.GetAxis("Horizontal") * reverseNum, Input.GetAxis("Vertical") * reverseNum);
         inputs = Vector2.ClampMagnitude(inputs, 1);
         //setting camera postion values
         Vector3 camF = camPos.forward;
@@ -27,8 +29,16 @@ public class Tornado : MonoBehaviour
         camR.y = 0;
         camF = camF.normalized;
         camR = camR.normalized;
-        transform.position += (camF * inputs.y + camR * inputs.x) * Time.deltaTime * 5;
-        
+        if(shockCooldown <= 0)
+            transform.position += (camF * inputs.y + camR * inputs.x) * Time.deltaTime * speed;
+        if (shockCooldown > 0)
+            shockCooldown -= Time.deltaTime;
+        if (tremorCooldown > 0)
+            tremorCooldown -= Time.deltaTime;
+        if (avalancheCooldown > 0)
+            avalancheCooldown -= Time.deltaTime;
+        reverseNum = (tremorCooldown > 0) ? -1 : 1;
+        speed = (avalancheCooldown > 0) ? 1 : 5;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -67,8 +77,38 @@ public class Tornado : MonoBehaviour
             exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
             objects.RemoveAt(rand); // remove object from list
             Destroy(other.gameObject);
+            shockCooldown = 3f; // player is stunned
         }
-        
+        if (other.CompareTag("Reverse"))
+        {
+            int rand = Random.Range(0, objects.Count);
+            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
+            List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
+            int randX = randFlyList[Random.Range(0, randFlyList.Count)];
+            int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
+            exitOb.taken = false; // object is no longer taken
+            exitOb.exitCooldown = 3f; // cooldown before being picked up again
+            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
+            objects.RemoveAt(rand); // remove object from list
+            Destroy(other.gameObject);
+            tremorCooldown = 3f; // movement is reversed
+        }
+        if (other.CompareTag("slow"))
+        {
+            int rand = Random.Range(0, objects.Count);
+            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
+            List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
+            int randX = randFlyList[Random.Range(0, randFlyList.Count)];
+            int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
+            exitOb.taken = false; // object is no longer taken
+            exitOb.exitCooldown = 3f; // cooldown before being picked up again
+            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
+            objects.RemoveAt(rand); // remove object from list
+            Destroy(other.gameObject);
+            avalancheCooldown = 3f; // slower movement
+        }
+
+
     }
     private void OnTriggerExit(Collider other)
     {
