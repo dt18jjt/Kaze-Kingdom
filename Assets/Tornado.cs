@@ -91,7 +91,7 @@ public class Tornado : MonoBehaviour
             exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
             objects.RemoveAt(rand); // remove object from list
             Destroy(other.gameObject);
-            tremorCooldown = 3f; // movement is reversed
+            tremorCooldown = 5f; // movement is reversed
         }
         if (other.CompareTag("slow"))
         {
