@@ -5,18 +5,20 @@ using UnityEngine;
 public class Tornado : MonoBehaviour
 {
     public Transform tornadoCenter;
-    public float pullForce, refreshRate, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f;
+    public float pullForce, refreshRate, score, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f;
     int reverseNum, speed;
     [SerializeField]
     public Camera cam;
     public Transform camPos;
     public List<GameObject> objects = new List<GameObject>();
     Vector2 inputs;
-    public GameObject hitEffect;
+    public GameObject hitEffect, flashEffect;
+    CameraFollow cameraFollow;
     private void Start()
     {
         reverseNum = 1;
         speed = 5;
+        cameraFollow = GameObject.FindWithTag("MainCamera").GetComponent<CameraFollow>();
     }
     private void Update()
     {
@@ -52,8 +54,8 @@ public class Tornado : MonoBehaviour
         exitOb.exitCooldown = 3f; // cooldown before being picked up again
         exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
         objects.RemoveAt(rand); // remove object from list
-        GameObject h = Instantiate(hitEffect, tornadoCenter.position, Quaternion.identity);
-        Destroy(h, 0.6f);
+        //GameObject h = Instantiate(hitEffect, tornadoCenter.position, Quaternion.identity);
+        //Destroy(h, 0.6f);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -69,6 +71,7 @@ public class Tornado : MonoBehaviour
                 global.comboNum += 1;
                 global.comboTime = global.comboTimeAmt;
                 ob.taken = true;
+                score += ob.scoreAdd;
                 //ob.GetComponent<BoxCollider>().isTrigger = true;
                 pullForce += 10;
                 //cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y+1, cam.transform.position.z + 1);
@@ -84,12 +87,14 @@ public class Tornado : MonoBehaviour
         {
             loseObject();
             Destroy(other.gameObject);
+            StartCoroutine(Flash());
             shockCooldown = 3f; // player is stunned
         }
         if (other.CompareTag("Reverse"))
         {
             loseObject();
             Destroy(other.gameObject);
+            cameraFollow.shakeDuration = 1f;
             tremorCooldown = 5f; // movement is reversed
         }
         if (other.CompareTag("Slow"))
@@ -100,6 +105,12 @@ public class Tornado : MonoBehaviour
         }
 
 
+    }
+    IEnumerator Flash()
+    {
+        flashEffect.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        flashEffect.SetActive(false);
     }
     private void OnTriggerExit(Collider other)
     {
