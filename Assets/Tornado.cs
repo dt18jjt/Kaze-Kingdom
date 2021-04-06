@@ -12,6 +12,7 @@ public class Tornado : MonoBehaviour
     public Transform camPos;
     public List<GameObject> objects = new List<GameObject>();
     Vector2 inputs;
+    public GameObject hitEffect;
     private void Start()
     {
         reverseNum = 1;
@@ -40,6 +41,20 @@ public class Tornado : MonoBehaviour
         reverseNum = (tremorCooldown > 0) ? -1 : 1;
         speed = (avalancheCooldown > 0) ? 1 : 5;
     }
+    void loseObject()
+    {
+        int rand = Random.Range(0, objects.Count);
+        ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
+        List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
+        int randX = randFlyList[Random.Range(0, randFlyList.Count)];
+        int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
+        exitOb.taken = false; // object is no longer taken
+        exitOb.exitCooldown = 3f; // cooldown before being picked up again
+        exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
+        objects.RemoveAt(rand); // remove object from list
+        GameObject h = Instantiate(hitEffect, tornadoCenter.position, Quaternion.identity);
+        Destroy(h, 0.6f);
+    }
     private void OnTriggerEnter(Collider other)
     {
         Global global = GameObject.Find("G").GetComponent<Global>();
@@ -67,43 +82,19 @@ public class Tornado : MonoBehaviour
         }
         if (other.CompareTag("Shock"))
         {
-            int rand = Random.Range(0, objects.Count);
-            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
-            List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
-            int randX = randFlyList[Random.Range(0, randFlyList.Count)];
-            int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
-            exitOb.taken = false; // object is no longer taken
-            exitOb.exitCooldown = 3f; // cooldown before being picked up again
-            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
-            objects.RemoveAt(rand); // remove object from list
+            loseObject();
             Destroy(other.gameObject);
             shockCooldown = 3f; // player is stunned
         }
         if (other.CompareTag("Reverse"))
         {
-            int rand = Random.Range(0, objects.Count);
-            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
-            List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
-            int randX = randFlyList[Random.Range(0, randFlyList.Count)];
-            int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
-            exitOb.taken = false; // object is no longer taken
-            exitOb.exitCooldown = 3f; // cooldown before being picked up again
-            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
-            objects.RemoveAt(rand); // remove object from list
+            loseObject();
             Destroy(other.gameObject);
             tremorCooldown = 5f; // movement is reversed
         }
-        if (other.CompareTag("slow"))
+        if (other.CompareTag("Slow"))
         {
-            int rand = Random.Range(0, objects.Count);
-            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
-            List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
-            int randX = randFlyList[Random.Range(0, randFlyList.Count)];
-            int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
-            exitOb.taken = false; // object is no longer taken
-            exitOb.exitCooldown = 3f; // cooldown before being picked up again
-            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
-            objects.RemoveAt(rand); // remove object from list
+            loseObject();
             Destroy(other.gameObject);
             avalancheCooldown = 3f; // slower movement
         }
