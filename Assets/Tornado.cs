@@ -12,7 +12,7 @@ public class Tornado : MonoBehaviour
     public Transform camPos;
     public List<GameObject> objects = new List<GameObject>();
     Vector2 inputs;
-    public GameObject hitEffect, flashEffect;
+    public GameObject flashEffect, slowEffect;
     CameraFollow cameraFollow;
     private void Start()
     {
@@ -41,7 +41,8 @@ public class Tornado : MonoBehaviour
         if (avalancheCooldown > 0)
             avalancheCooldown -= Time.deltaTime;
         reverseNum = (tremorCooldown > 0) ? -1 : 1;
-        speed = (avalancheCooldown > 0) ? 1 : 5;
+        speed = (avalancheCooldown > 0) ? 3 : 6;
+        slowEffect.SetActive((avalancheCooldown > 0) ? true : false);
     }
     void loseObject()
     {
@@ -101,7 +102,7 @@ public class Tornado : MonoBehaviour
         {
             loseObject();
             Destroy(other.gameObject);
-            avalancheCooldown = 3f; // slower movement
+            avalancheCooldown = 10f; // slower movement
         }
 
 
@@ -109,7 +110,7 @@ public class Tornado : MonoBehaviour
     IEnumerator Flash()
     {
         flashEffect.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         flashEffect.SetActive(false);
     }
     private void OnTriggerExit(Collider other)
