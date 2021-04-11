@@ -6,11 +6,13 @@ public class Tornado : MonoBehaviour
 {
     public Transform tornadoCenter;
     public float pullForce, refreshRate, score, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f, reverseNum, speed, normalSpeed;
+    public bool camScale, Scale;
     [SerializeField]
     public GameObject cam;
     public Transform camPos;
     public List<GameObject> objects = new List<GameObject>();
     Vector2 inputs;
+    Vector3 newCamScale, newScale;
     public GameObject flashEffect, slowEffect;
     CameraFollow cameraFollow;
     private void Start()
@@ -30,7 +32,7 @@ public class Tornado : MonoBehaviour
         camR.y = 0;
         camF = camF.normalized;
         camR = camR.normalized;
-        if(shockCooldown <= 0)
+        if (shockCooldown <= 0)
             transform.position += (camF * inputs.y + camR * inputs.x) * Time.deltaTime * speed;
         if (shockCooldown > 0)
             shockCooldown -= Time.deltaTime;
@@ -39,8 +41,34 @@ public class Tornado : MonoBehaviour
         if (avalancheCooldown > 0)
             avalancheCooldown -= Time.deltaTime;
         reverseNum = (tremorCooldown > 0) ? -1 : 1;
-        speed = (avalancheCooldown > 0) ? normalSpeed/2 : normalSpeed;
+        speed = (avalancheCooldown > 0) ? normalSpeed / 2 : normalSpeed;
         slowEffect.SetActive((avalancheCooldown > 0) ? true : false);
+        //Camera scale up
+        if (camScale)
+        {
+            cam.transform.localScale = Vector3.Lerp(cam.transform.localScale, newCamScale, Time.deltaTime);
+            if (Vector3.Distance(cam.transform.localScale, newCamScale) < 0.001f)
+            {
+                cam.transform.localScale = newCamScale;
+                //hero = null;
+                camScale = false;
+
+            }
+
+        }
+        //Tornado Scale up
+        if (Scale)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, newScale, Time.deltaTime);
+            if (Vector3.Distance(transform.localScale, newScale) < 0.001f)
+            {
+                transform.localScale = newScale;
+                //hero = null;
+                Scale = false;
+
+            }
+
+        }
     }
     void loseObject()
     {
@@ -75,11 +103,14 @@ public class Tornado : MonoBehaviour
                 score += ob.scoreAdd;
                 //increase pulling force
                 pullForce += ob.forceAdd;
-                //Change camera position
-                cam.transform.localScale = new Vector3(transform.localScale.x + 0.01f, transform.localScale.y + 0.01f, 
-                    transform.localScale.z + 0.01f);
-                //Increase size
-                transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
+                //new camera scale
+                camScale = true;
+                newCamScale = new Vector3(cam.transform.localScale.x + (ob.sizeAdd/10), cam.transform.localScale.y + (ob.sizeAdd/10), 
+                    cam.transform.localScale.z + (ob.sizeAdd/10));
+                //cam.transform.localScale = Vector3.Lerp(cam.transform.localScale, newScale, 2*Time.deltaTime);
+                //new tornado scale
+                Scale = true;
+                newScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
                 //increase speed
                 normalSpeed += ob.sizeAdd;
                 //object is no long stationary
