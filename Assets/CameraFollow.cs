@@ -7,7 +7,6 @@ public class CameraFollow : MonoBehaviour
     public float RotationSpeed = 1;
     public Transform Target, Player, Rotator;
     public Transform playerTransform;
-    private Vector3 cameraOffset;
     public Transform camTransform;
     [Range(0.01f, 1.0f)]
     public float smoothFactor = 0.5f;
@@ -20,13 +19,8 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cameraOffset = transform.position - playerTransform.position;
         camTransform = GetComponent<Transform>();
         originalPos = camTransform.localPosition;
-    }
-    private void OnEnable()
-    {
-        
     }
     // Update is called once per frame
     void Update()

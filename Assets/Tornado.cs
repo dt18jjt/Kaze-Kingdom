@@ -5,10 +5,9 @@ using UnityEngine;
 public class Tornado : MonoBehaviour
 {
     public Transform tornadoCenter;
-    public float pullForce, refreshRate, score, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f;
-    int reverseNum, speed;
+    public float pullForce, refreshRate, score, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f, reverseNum, speed, normalSpeed;
     [SerializeField]
-    public Camera cam;
+    public GameObject cam;
     public Transform camPos;
     public List<GameObject> objects = new List<GameObject>();
     Vector2 inputs;
@@ -17,7 +16,6 @@ public class Tornado : MonoBehaviour
     private void Start()
     {
         reverseNum = 1;
-        speed = 5;
         cameraFollow = GameObject.FindWithTag("MainCamera").GetComponent<CameraFollow>();
     }
     private void Update()
@@ -41,7 +39,7 @@ public class Tornado : MonoBehaviour
         if (avalancheCooldown > 0)
             avalancheCooldown -= Time.deltaTime;
         reverseNum = (tremorCooldown > 0) ? -1 : 1;
-        speed = (avalancheCooldown > 0) ? 3 : 6;
+        speed = (avalancheCooldown > 0) ? normalSpeed/2 : normalSpeed;
         slowEffect.SetActive((avalancheCooldown > 0) ? true : false);
     }
     void loseObject()
@@ -68,16 +66,22 @@ public class Tornado : MonoBehaviour
             {
                 objects.Add(other.gameObject);
                 StartCoroutine(pullObject(other, true));
+                //add to combo
                 global.comboOn = true;
                 global.comboNum += 1;
                 global.comboTime = global.comboTimeAmt;
                 ob.taken = true;
+                //add to score
                 score += ob.scoreAdd;
-                //ob.GetComponent<BoxCollider>().isTrigger = true;
-                pullForce += 10;
-                //cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y+1, cam.transform.position.z + 1);
-                cam.fieldOfView += 0.1f;
+                //increase pulling force
+                pullForce += ob.forceAdd;
+                //Change camera position
+                cam.transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
+                //Increase size
                 transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
+                //increase speed
+                normalSpeed *= ob.sizeAdd;
+                //object is no long stationary
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;
                 
