@@ -76,11 +76,12 @@ public class Tornado : MonoBehaviour
                 //increase pulling force
                 pullForce += ob.forceAdd;
                 //Change camera position
-                cam.transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
+                cam.transform.localScale = new Vector3(transform.localScale.x + 0.01f, transform.localScale.y + 0.01f, 
+                    transform.localScale.z + 0.01f);
                 //Increase size
                 transform.localScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
                 //increase speed
-                normalSpeed *= ob.sizeAdd;
+                normalSpeed += ob.sizeAdd;
                 //object is no long stationary
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;
