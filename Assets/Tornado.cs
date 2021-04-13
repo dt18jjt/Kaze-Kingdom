@@ -12,13 +12,15 @@ public class Tornado : MonoBehaviour
     public Transform camPos;
     public List<GameObject> objects = new List<GameObject>();
     Vector2 inputs;
-    public Vector3 newCamScale, newScale;
+    public Vector3 newCamScale, newScale, realCamScale, realScale;
     public GameObject flashEffect, slowEffect;
     CameraFollow cameraFollow;
     private void Start()
     {
         reverseNum = 1;
         cameraFollow = GameObject.FindWithTag("MainCamera").GetComponent<CameraFollow>();
+        newScale = transform.localScale;
+        newCamScale = cam.transform.localScale;
     }
     private void Update()
     {
@@ -46,10 +48,10 @@ public class Tornado : MonoBehaviour
         //Camera scale up
         if (camScale)
         {
-            cam.transform.localScale = Vector3.Lerp(cam.transform.localScale, newCamScale, 3 * Time.deltaTime);
-            if (Vector3.Distance(cam.transform.localScale, (cam.transform.localScale + newCamScale)) < 0.001f)
+            cam.transform.localScale = Vector3.Lerp(cam.transform.localScale,(newCamScale), 3 * Time.deltaTime);
+            if (Vector3.Distance(cam.transform.localScale, (newCamScale)) < 0.001f)
             {
-                cam.transform.localScale = (cam.transform.localScale + newCamScale);
+                cam.transform.localScale = cam.transform.localScale;
                 //hero = null;
                 camScale = false;
 
@@ -59,10 +61,10 @@ public class Tornado : MonoBehaviour
         //Tornado Scale up
         if (Scale)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, newScale, 3 * Time.deltaTime);
-            if (Vector3.Distance(transform.localScale, (transform.localScale + newScale)) < 0.001f)
+            transform.localScale = Vector3.Lerp(transform.localScale, (newScale), 3 * Time.deltaTime);
+            if (Vector3.Distance(transform.localScale, (newScale)) < 0.001f)
             {
-                transform.localScale = (transform.localScale + newScale);
+                transform.localScale = transform.localScale;
                 //hero = null;
                 Scale = false;
 
@@ -105,9 +107,7 @@ public class Tornado : MonoBehaviour
                 pullForce += ob.forceAdd;
                 //add to camera scale
                 camScale = true;
-                newCamScale += new Vector3((ob.sizeAdd)/2,(ob.sizeAdd)/2, 
-                    (ob.sizeAdd)/2);
-                //cam.transform.localScale = Vector3.Lerp(cam.transform.localScale, newScale, 2*Time.deltaTime);
+                newCamScale += new Vector3((ob.sizeAdd/2),(ob.sizeAdd/2), (ob.sizeAdd/2));
                 //add to tornado scale
                 Scale = true;
                 newScale += new Vector3(ob.sizeAdd, ob.sizeAdd, ob.sizeAdd);

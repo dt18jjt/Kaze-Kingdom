@@ -2389,6 +2389,8 @@ MonoBehaviour:
   objects: []
   newCamScale: {x: 0, y: 0, z: 0}
   newScale: {x: 0, y: 0, z: 0}
+  realCamScale: {x: 0, y: 0, z: 0}
+  realScale: {x: 0, y: 0, z: 0}
   flashEffect: {fileID: 616848343}
   slowEffect: {fileID: 1974696683}
 --- !u!135 &1998429752
@@ -2451,7 +2453,7 @@ Transform:
   m_GameObject: {fileID: 2029805613}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 2.7186, y: 0.16, z: -253.86389}
-  m_LocalScale: {x: 0.40095893, y: 0.40095893, z: 0.40095893}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 963194228}
   m_Father: {fileID: 0}

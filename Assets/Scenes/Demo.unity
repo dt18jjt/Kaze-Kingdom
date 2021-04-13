@@ -8989,11 +8989,18 @@ MonoBehaviour:
   shockCooldown: 0
   tremorCooldown: 0
   avalancheCooldown: 0
-  cam: {fileID: 963194227}
+  reverseNum: 0
+  speed: 6
+  normalSpeed: 6
+  camScale: 0
+  Scale: 0
+  cam: {fileID: 2029805613}
   camPos: {fileID: 963194228}
   objects: []
+  newCamScale: {x: 0, y: 0, z: 0}
+  newScale: {x: 0, y: 0, z: 0}
   flashEffect: {fileID: 616848343}
-  slowEffect: {fileID: 0}
+  slowEffect: {fileID: 1974696683}
 --- !u!135 &1998429752
 SphereCollider:
   m_ObjectHideFlags: 0
