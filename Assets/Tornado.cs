@@ -12,7 +12,7 @@ public class Tornado : MonoBehaviour
     public Transform camPos;
     public List<GameObject> objects = new List<GameObject>();
     Vector2 inputs;
-    Vector3 newCamScale, newScale;
+    public Vector3 newCamScale, newScale;
     public GameObject flashEffect, slowEffect;
     CameraFollow cameraFollow;
     private void Start()
@@ -46,10 +46,10 @@ public class Tornado : MonoBehaviour
         //Camera scale up
         if (camScale)
         {
-            cam.transform.localScale = Vector3.Lerp(cam.transform.localScale, newCamScale, Time.deltaTime);
-            if (Vector3.Distance(cam.transform.localScale, newCamScale) < 0.001f)
+            cam.transform.localScale = Vector3.Lerp(cam.transform.localScale, newCamScale, 3 * Time.deltaTime);
+            if (Vector3.Distance(cam.transform.localScale, (cam.transform.localScale + newCamScale)) < 0.001f)
             {
-                cam.transform.localScale = newCamScale;
+                cam.transform.localScale = (cam.transform.localScale + newCamScale);
                 //hero = null;
                 camScale = false;
 
@@ -59,10 +59,10 @@ public class Tornado : MonoBehaviour
         //Tornado Scale up
         if (Scale)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, newScale, Time.deltaTime);
-            if (Vector3.Distance(transform.localScale, newScale) < 0.001f)
+            transform.localScale = Vector3.Lerp(transform.localScale, newScale, 3 * Time.deltaTime);
+            if (Vector3.Distance(transform.localScale, (transform.localScale + newScale)) < 0.001f)
             {
-                transform.localScale = newScale;
+                transform.localScale = (transform.localScale + newScale);
                 //hero = null;
                 Scale = false;
 
@@ -103,16 +103,16 @@ public class Tornado : MonoBehaviour
                 score += ob.scoreAdd;
                 //increase pulling force
                 pullForce += ob.forceAdd;
-                //new camera scale
+                //add to camera scale
                 camScale = true;
-                newCamScale = new Vector3(cam.transform.localScale.x + (ob.sizeAdd/10), cam.transform.localScale.y + (ob.sizeAdd/10), 
-                    cam.transform.localScale.z + (ob.sizeAdd/10));
+                newCamScale += new Vector3((ob.sizeAdd)/2,(ob.sizeAdd)/2, 
+                    (ob.sizeAdd)/2);
                 //cam.transform.localScale = Vector3.Lerp(cam.transform.localScale, newScale, 2*Time.deltaTime);
-                //new tornado scale
+                //add to tornado scale
                 Scale = true;
-                newScale = new Vector3(transform.localScale.x + ob.sizeAdd, transform.localScale.y + ob.sizeAdd, transform.localScale.z + ob.sizeAdd);
+                newScale += new Vector3(ob.sizeAdd, ob.sizeAdd, ob.sizeAdd);
                 //increase speed
-                normalSpeed += ob.sizeAdd;
+                normalSpeed += (ob.sizeAdd*5);
                 //object is no long stationary
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;
