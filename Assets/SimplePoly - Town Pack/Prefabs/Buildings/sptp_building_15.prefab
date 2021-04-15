@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taken: 0
+  large: 1
   forceCap: 10000
   forceAdd: 0
   sizeAdd: 0

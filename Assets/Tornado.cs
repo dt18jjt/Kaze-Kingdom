@@ -113,10 +113,12 @@ public class Tornado : MonoBehaviour
                 newScale += new Vector3(ob.sizeAdd, ob.sizeAdd, ob.sizeAdd);
                 //increase speed
                 normalSpeed += (ob.sizeAdd*5);
-                //object is no long stationary
+                //object is no longer stationary
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;
-                
+                //disable colliders and larger objects
+                if(ob.large)
+                    other.gameObject.GetComponent<BoxCollider>().enabled = false;
             }
                 
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectScript : MonoBehaviour
 {
-    public bool taken;
+    public bool taken, large;
     public float forceCap, forceAdd, sizeAdd, scoreAdd, exitCooldown = 0f, mass;
     Transform center;
     // Start is called before the first frame update
