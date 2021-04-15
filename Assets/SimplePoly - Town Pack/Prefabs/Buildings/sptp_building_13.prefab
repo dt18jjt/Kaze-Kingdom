@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 472486}
   - component: {fileID: 3393216}
   - component: {fileID: 2340062}
-  - component: {fileID: 6413326}
   - component: {fileID: 8291646999893132913}
+  - component: {fileID: 2436593890059947475}
+  - component: {fileID: 891587580893580555}
   m_Layer: 0
   m_Name: sptp_building_13
-  m_TagString: Untagged
+  m_TagString: OBJ
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,20 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6413326
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 181362}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 754f60096a070384db9dc966a4bdc5cf, type: 3}
 --- !u!65 &8291646999893132913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,3 +94,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.55283, y: 11.295179, z: 6.8054}
   m_Center: {x: 0.15075803, y: 5.647459, z: 0.00837791}
+--- !u!54 &2436593890059947475
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181362}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &891587580893580555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 181362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946011bc8fa2c874cb5f9477045d66a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taken: 0
+  forceCap: 10000
+  forceAdd: 0
+  sizeAdd: 0
+  scoreAdd: 0
+  exitCooldown: 0
+  mass: 0

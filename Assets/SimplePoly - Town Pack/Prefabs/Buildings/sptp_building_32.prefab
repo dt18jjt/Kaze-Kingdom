@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 476192}
   - component: {fileID: 3323004}
   - component: {fileID: 2332132}
-  - component: {fileID: 6424790}
   - component: {fileID: 8122431665447456968}
+  - component: {fileID: -1035959588132975270}
+  - component: {fileID: 716657951734288995}
   m_Layer: 0
   m_Name: sptp_building_32
-  m_TagString: Untagged
+  m_TagString: OBJ
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,20 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6424790
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129442}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: a82bd67ed683ae846b35fa3b4baa9fff, type: 3}
 --- !u!65 &8122431665447456968
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -105,5 +92,40 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.267719, y: 8.363886, z: 23.564917}
-  m_Center: {x: 0, y: 4.1817665, z: 0}
+  m_Size: {x: 10.519311, y: 4.955839, z: 21.493568}
+  m_Center: {x: -0.87420416, y: 2.4777431, z: -0.07057953}
+--- !u!54 &-1035959588132975270
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129442}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &716657951734288995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 946011bc8fa2c874cb5f9477045d66a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taken: 0
+  forceCap: 10000
+  forceAdd: 0
+  sizeAdd: 0
+  scoreAdd: 0
+  exitCooldown: 0
+  mass: 0
