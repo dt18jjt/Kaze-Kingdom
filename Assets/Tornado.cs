@@ -6,7 +6,7 @@ public class Tornado : MonoBehaviour
 {
     public Transform tornadoCenter;
     public float pullForce, refreshRate, score, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f, reverseNum, speed, normalSpeed;
-    public bool camScale, Scale;
+    public bool camScale, Scale, collide;
     [SerializeField]
     public GameObject cam;
     public Transform camPos;
@@ -22,11 +22,14 @@ public class Tornado : MonoBehaviour
         newScale = transform.localScale;
         newCamScale = cam.transform.localScale;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         //setting input values
         inputs = new Vector2(Input.GetAxis("Horizontal") * reverseNum, Input.GetAxis("Vertical") * reverseNum);
         inputs = Vector2.ClampMagnitude(inputs, 1);
+    }
+    private void Update()
+    {
         //setting camera postion values
         Vector3 camF = camPos.forward;
         Vector3 camR = camPos.right;
@@ -42,8 +45,11 @@ public class Tornado : MonoBehaviour
             tremorCooldown -= Time.deltaTime;
         if (avalancheCooldown > 0)
             avalancheCooldown -= Time.deltaTime;
+        //Reverse controls
         reverseNum = (tremorCooldown > 0) ? -1 : 1;
+        //speed stop
         speed = (avalancheCooldown > 0) ? normalSpeed / 2 : normalSpeed;
+        //slowdown
         slowEffect.SetActive((avalancheCooldown > 0) ? true : false);
         //Camera scale up
         if (camScale)
@@ -161,6 +167,14 @@ public class Tornado : MonoBehaviour
             StartCoroutine(pullObject(other, false));            
         }
         
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            inputs = Vector2.zero;
+            Debug.Log("c");
+        }
     }
     IEnumerator pullObject(Collider x, bool shouldPull)
     {
