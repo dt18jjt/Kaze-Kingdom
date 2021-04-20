@@ -103,16 +103,19 @@ public class Tornado : MonoBehaviour
                 ob.taken = true;
                 //add to score
                 score += ob.scoreAdd;
-                //increase pulling force
-                pullForce += ob.forceAdd;
-                //add to camera scale
-                camScale = true;
-                newCamScale += new Vector3((ob.sizeAdd/2),(ob.sizeAdd/2), (ob.sizeAdd/2));
-                //add to tornado scale
-                Scale = true;
-                newScale += new Vector3(ob.sizeAdd, ob.sizeAdd, ob.sizeAdd);
-                //increase speed
-                normalSpeed += (ob.sizeAdd*5);
+                //increase pulling force if lower than maximunm effect
+                if(pullForce < ob.forceMax)
+                {
+                    pullForce += ob.forceAdd;
+                    //add to camera scale
+                    camScale = true;
+                    newCamScale += new Vector3((ob.sizeAdd / 2), (ob.sizeAdd / 2), (ob.sizeAdd / 2));
+                    //add to tornado scale
+                    Scale = true;
+                    newScale += new Vector3(ob.sizeAdd, ob.sizeAdd, ob.sizeAdd);
+                    //increase speed
+                    normalSpeed += (ob.sizeAdd * 5);
+                }
                 //object is no longer stationary
                 other.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 other.gameObject.GetComponent<Rigidbody>().useGravity = false;

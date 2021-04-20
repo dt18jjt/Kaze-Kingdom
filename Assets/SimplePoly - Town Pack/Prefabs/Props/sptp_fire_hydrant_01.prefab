@@ -123,8 +123,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taken: 0
+  large: 0
   forceCap: 1200
   forceAdd: 10
+  forceMax: 1400
   sizeAdd: 0.02
   scoreAdd: 500
   exitCooldown: 0

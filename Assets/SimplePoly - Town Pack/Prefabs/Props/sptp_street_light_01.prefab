@@ -125,10 +125,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taken: 0
   large: 1
-  forceCap: 10000
-  forceAdd: 0
-  sizeAdd: 0
-  scoreAdd: 0
+  forceCap: 1200
+  forceAdd: 25
+  forceMax: 1400
+  sizeAdd: 0.025
+  scoreAdd: 200
   exitCooldown: 0
   mass: 0
 --- !u!1 &2266744935243425671
