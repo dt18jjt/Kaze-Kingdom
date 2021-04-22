@@ -2,39 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Global : MonoBehaviour
 {
-    public float timer;
-    public float comboTime;
-    public float comboTimeAmt = 5;
+    public float timer, comboTime, comboTimeAmt = 5;
     public int comboNum;
-    public bool comboOn = true;
-    public Text timeText;
-    public Text comboText;
+    public bool comboOn = true, paused;
+    public Text timeText, comboText;
     public Image fillImg;
+    startScript start;
     // Start is called before the first frame update
     void Start()
     {
-        comboTime = 0;
-        fillImg.fillAmount = comboTime;
+       comboTime = 0;
+       fillImg.fillAmount = comboTime;
        comboText.enabled = false;
+       start = GetComponent<startScript>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(timer > 0)
+        if (start.playing && !paused)
         {
-            timer -= Time.deltaTime;
-            DisplayTime(timer);
+            timer -= (timer > 0) ? Time.deltaTime : 0;
+            DisplayTime(timer);      
         }
-        else
-        {
-            timer = 0;
-        }
-        if (comboOn && comboTime > 0)
+        if (comboOn && comboTime > 0 && !paused)
         {
             comboText.enabled = true;          
             comboText.text = comboNum.ToString();
@@ -48,6 +44,19 @@ public class Global : MonoBehaviour
 
             }
         }
+        Time.timeScale = (paused) ? 0.1f : 1f;
+        if(Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Joystick1Button7))
+        {
+            if (!paused && start.playing)
+            {
+                paused = true;
+                SceneManager.LoadScene("Pause", LoadSceneMode.Additive);
+            }
+            else
+                paused = false;
+                
+        }
+
     }
     void DisplayTime(float timeToDisplay)
     {
@@ -58,4 +67,5 @@ public class Global : MonoBehaviour
 
         timeText.text = "Time Left: " + string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
 }

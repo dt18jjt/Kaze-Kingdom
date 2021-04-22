@@ -16,6 +16,7 @@ public class Tornado : MonoBehaviour
     public GameObject flashEffect, slowEffect;
     CameraFollow cameraFollow;
     startScript start;
+    Global global1;
     private void Start()
     {
         reverseNum = 1;
@@ -23,11 +24,12 @@ public class Tornado : MonoBehaviour
         newScale = transform.localScale;
         newCamScale = cam.transform.localScale;
         start = GameObject.Find("G").GetComponent<startScript>();
+        global1 = GameObject.Find("G").GetComponent<Global>();
     }
     private void FixedUpdate()
     {
         //setting input values
-        if (start.play)
+        if (start.playing && !global1.paused)
         {
             inputs = new Vector2(Input.GetAxis("Horizontal") * reverseNum, Input.GetAxis("Vertical") * reverseNum);
             inputs = Vector2.ClampMagnitude(inputs, 1);

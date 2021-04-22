@@ -16,11 +16,15 @@ public class CameraFollow : MonoBehaviour
     public float shakeAmount = 0.7f;
     public float decreaseFactor = 1.0f;
     Vector3 originalPos;
+    startScript start;
+    Global global;
     // Start is called before the first frame update
     void Start()
     {
         camTransform = GetComponent<Transform>();
         originalPos = camTransform.localPosition;
+        start = GameObject.Find("G").GetComponent<startScript>();
+        global = GameObject.Find("G").GetComponent<Global>();
     }
     // Update is called once per frame
     void Update()
@@ -40,7 +44,8 @@ public class CameraFollow : MonoBehaviour
     }
     private void LateUpdate()
     {
-        CamControl();
+        if(start.playing && !global.paused)
+            CamControl();
     }
     void CamControl()
     {
