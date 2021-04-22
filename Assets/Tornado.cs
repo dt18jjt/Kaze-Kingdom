@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Vehicles.Car;
 
 public class Tornado : MonoBehaviour
 {
@@ -135,6 +136,11 @@ public class Tornado : MonoBehaviour
                 //disable colliders and larger objects
                 if(ob.large)
                     other.gameObject.GetComponent<BoxCollider>().enabled = false;
+                if (ob.vehicle)
+                {
+                    other.GetComponent<CarController>().enabled = false;
+                    other.GetComponent<CarAIControl>().enabled = false;
+                }
             }
                 
         }
