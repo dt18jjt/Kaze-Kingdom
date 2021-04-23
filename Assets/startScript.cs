@@ -48,11 +48,16 @@ public class startScript : MonoBehaviour
     }
     public void levelStart()
     {
+        Invoke("mainOff", 0.5f);
+        //Remove Main menu
         SceneManager.UnloadSceneAsync("Main");
-        main = false;
         startImage.SetActive(true);
         //blinking text at start
         StartCoroutine(textBlink());
+    }
+    void mainOff()
+    {
+        main = false;
     }
     IEnumerator beginFade()
     {

@@ -12,11 +12,11 @@ public class mainScript : MonoBehaviour
     }
     public void Play()
     {
-        start.main = false;
         start.levelStart();
     }
     public void Exit()
     {
         Application.Quit();
     }
+
 }

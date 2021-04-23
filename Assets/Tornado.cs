@@ -15,6 +15,7 @@ public class Tornado : MonoBehaviour
     Vector2 inputs;
     public Vector3 newCamScale, newScale, realCamScale, realScale;
     public GameObject flashEffect, slowEffect;
+    public AudioClip pickup;
     CameraFollow cameraFollow;
     startScript start;
     Global global1;
@@ -108,6 +109,8 @@ public class Tornado : MonoBehaviour
         {
             if (ob.forceCap <= pullForce && !ob.taken && ob.exitCooldown <= 0)
             {
+                GetComponent<AudioSource>().PlayOneShot(pickup);
+                //add object
                 objects.Add(other.gameObject);
                 StartCoroutine(pullObject(other, true));
                 //add to combo

@@ -65,7 +65,9 @@ public class Global : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        timeText.text = "Time Left: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+        //timeText.text = "Time Left: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+        timeText.text = (minutes >= 1) ? minutes.ToString() : seconds.ToString();
+        timeText.color = (minutes >= 1) ? Color.white : Color.red;
     }
 
 }
