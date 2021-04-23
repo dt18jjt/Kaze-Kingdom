@@ -108,9 +108,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taken: 0
   large: 0
+  vehicle: 0
   forceCap: 100
   forceAdd: 10
-  forceMax: 300
+  forceMax: 200
   sizeAdd: 0.01
   scoreAdd: 50
   exitCooldown: 0

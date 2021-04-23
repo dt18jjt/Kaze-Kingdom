@@ -125,10 +125,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taken: 0
   large: 1
-  forceCap: 1200
+  vehicle: 0
+  forceCap: 800
   forceAdd: 25
-  forceMax: 1400
-  sizeAdd: 0.025
+  forceMax: 1000
+  sizeAdd: 0.07
   scoreAdd: 200
   exitCooldown: 0
   mass: 0
@@ -150,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4433931586891112452
 Transform:
   m_ObjectHideFlags: 0
