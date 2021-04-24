@@ -6,7 +6,7 @@ using UnityStandardAssets.Vehicles.Car;
 public class Tornado : MonoBehaviour
 {
     public Transform tornadoCenter;
-    public float pullForce, refreshRate, score, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f, reverseNum, speed, normalSpeed;
+    public float pullForce, refreshRate, score, cmbScore = 0f, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f, reverseNum, speed, normalSpeed;
     public bool camScale, Scale, collide;
     [SerializeField]
     public GameObject cam;
@@ -18,7 +18,7 @@ public class Tornado : MonoBehaviour
     public AudioClip pickup;
     CameraFollow cameraFollow;
     startScript start;
-    Global global1;
+    Global global;
     private void Start()
     {
         reverseNum = 1;
@@ -26,12 +26,12 @@ public class Tornado : MonoBehaviour
         newScale = transform.localScale;
         newCamScale = cam.transform.localScale;
         start = GameObject.Find("G").GetComponent<startScript>();
-        global1 = GameObject.Find("G").GetComponent<Global>();
+        global = GameObject.Find("G").GetComponent<Global>();
     }
     private void FixedUpdate()
     {
         //setting input values
-        if (start.playing && !global1.paused)
+        if (start.playing && !global.paused)
         {
             inputs = new Vector2(Input.GetAxis("Horizontal") * reverseNum, Input.GetAxis("Vertical") * reverseNum);
             inputs = Vector2.ClampMagnitude(inputs, 1);
@@ -86,6 +86,7 @@ public class Tornado : MonoBehaviour
             }
 
         }
+   
     }
     void loseObject()
     {
@@ -103,7 +104,6 @@ public class Tornado : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Global global = GameObject.Find("G").GetComponent<Global>();
         ObjectScript ob = other.gameObject.GetComponent<ObjectScript>();
         if (other.CompareTag("OBJ"))
         {

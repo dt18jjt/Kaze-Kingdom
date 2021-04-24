@@ -69,9 +69,9 @@ public class startScript : MonoBehaviour
         fadeOut.SetActive(true); // start fade out
         startCam.enabled = false; // disable starting camera
         PlayCam.enabled = true; // enable play camera
+        timer.SetActive(true);
         yield return new WaitForSeconds(1.9f);
         playAudio.Play(); // play looping audio
-        timer.SetActive(true);
         playing = true;
         fadeOut.SetActive(false);
     }

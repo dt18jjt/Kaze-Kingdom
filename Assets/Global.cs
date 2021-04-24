@@ -6,20 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class Global : MonoBehaviour
 {
-    public float timer, comboTime, comboTimeAmt = 5, seconds, minutes;
+    public float timer, comboTime, comboAdd, comboTimeAmt = 5, seconds, minutes;
     public int comboNum;
     public bool comboOn = true, paused;
-    public Text timeText, comboText;
+    public Text timeText, comboText, comboAddText;
     public Image cmbfillImg, timfillImg;
     startScript start;
+    Tornado player;
     // Start is called before the first frame update
     void Start()
     {
        comboTime = 0;
        cmbfillImg.fillAmount = comboTime;
-       timfillImg.fillAmount = 0;
+       timfillImg.fillAmount = 1;
        comboText.enabled = false;
+       comboAddText.enabled = false;
        start = GetComponent<startScript>();
+        player = GameObject.Find("Player").GetComponent<Tornado>();
 
     }
     void DisplayTime(float timeToDisplay)
@@ -52,9 +55,16 @@ public class Global : MonoBehaviour
             cmbfillImg.fillAmount = comboTime / comboTimeAmt;
             if(comboTime <= 0)
             {
+                if (comboNum > 1)
+                {
+                    comboAdd = comboNum * 100;
+                    StartCoroutine(showCombo());
+                }
                 comboOn = false;
                 comboText.enabled = false;
                 comboNum = 0;
+                
+                    
 
             }
         }
@@ -76,6 +86,14 @@ public class Global : MonoBehaviour
                 
         }
 
+    }
+    IEnumerator showCombo()
+    {
+        comboAddText.text = "+ " + comboAdd.ToString();
+        comboAddText.enabled = true;
+        player.cmbScore += comboAdd;
+        yield return new WaitForSeconds(1f);
+        comboAddText.enabled = false;
     }
    
 
