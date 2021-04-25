@@ -19,6 +19,7 @@ public class pauseScript : MonoBehaviour
     public void quit()
     {
         SceneManager.LoadScene("Level");
+        PlayerPrefs.DeleteAll();
     }
 
 }

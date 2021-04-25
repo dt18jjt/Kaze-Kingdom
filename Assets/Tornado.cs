@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Vehicles.Car;
+using UnityEngine.SceneManagement;
 
 public class Tornado : MonoBehaviour
 {
@@ -87,7 +88,11 @@ public class Tornado : MonoBehaviour
             }
 
         }
-   
+        //End level
+        if(global.timer <= 0)
+        {
+            StartCoroutine(End());
+        }
     }
     void loseObject()
     {
@@ -180,6 +185,15 @@ public class Tornado : MonoBehaviour
         flashEffect.SetActive(true);
         yield return new WaitForSeconds(0.2f);
         flashEffect.SetActive(false);
+    }
+    IEnumerator End()
+    {
+        start.playing = false;
+        start.fadeIn.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        PlayerPrefs.SetFloat("Score", score);
+        PlayerPrefs.SetFloat("Combo", cmbScore);
+        SceneManager.LoadScene("Score");
     }
     private void OnTriggerExit(Collider other)
     {

@@ -35623,7 +35623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15aad7535da6a2149bd25b5d5b56d8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 359
+  timer: 30
   comboTime: 0
   comboAdd: 0
   comboTimeAmt: 5
