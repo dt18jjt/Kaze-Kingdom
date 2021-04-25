@@ -85,7 +85,11 @@ public class Global : MonoBehaviour
                 
                 
         }
-
+        //End
+        if (timer <= 0)
+        {
+            SceneManager.LoadScene("Score");
+        }
     }
     IEnumerator showCombo()
     {

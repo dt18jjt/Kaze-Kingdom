@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class startScript : MonoBehaviour
 {
-    public bool playing = false, keyPress = false, main = true;
+    public bool playing = false, keyPress = false, main = true, test;
     public Transform Rotator;
     public Camera startCam, PlayCam;
     public GameObject fadeIn, fadeOut, startImage, startText, timer;
@@ -14,32 +14,37 @@ public class startScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startCam.enabled = true;
-        PlayCam.enabled = false;
-        fadeIn.SetActive(false);
-        fadeOut.SetActive(false);
-        timer.SetActive(false);
-        startImage.SetActive(false);
-        startText.SetActive(false);
-        //get all audio sources to play seperately
-        AudioSource[] audios = GetComponents<AudioSource>();
-        startAudio = audios[0];
-        playAudio = audios[1];
-        //Main menu load
-        SceneManager.LoadScene("Main", LoadSceneMode.Additive);
+        if (!test)
+        {
+            startCam.enabled = true;
+            PlayCam.enabled = false;
+            fadeIn.SetActive(false);
+            fadeOut.SetActive(false);
+            timer.SetActive(false);
+            startImage.SetActive(false);
+            startText.SetActive(false);
+            //get all audio sources to play seperately
+            AudioSource[] audios = GetComponents<AudioSource>();
+            startAudio = audios[0];
+            playAudio = audios[1];
+            //Main menu load
+            SceneManager.LoadScene("Main", LoadSceneMode.Additive);
+        }
+        
+        
 
     }
     private void FixedUpdate()
     {
         //start camera rotation
-        if (!playing)
+        if (!playing && !test)
             Rotator.Rotate(0, -1, 0);
     }
     // Update is called once per frame
     void Update()
     {
         //start the game on any key press
-        if (Input.anyKey && !keyPress && !main)
+        if (Input.anyKey && !keyPress && !main && !test)
         {
             StartCoroutine(beginFade());
             keyPress = true;

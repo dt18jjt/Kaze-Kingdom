@@ -22,7 +22,7 @@ public class Tornado : MonoBehaviour
     private void Start()
     {
         reverseNum = 1;
-        cameraFollow = GameObject.FindWithTag("MainCamera").GetComponent<CameraFollow>();
+        cameraFollow = GameObject.Find("Level Camera").GetComponent<CameraFollow>();
         newScale = transform.localScale;
         newCamScale = cam.transform.localScale;
         start = GameObject.Find("G").GetComponent<startScript>();
@@ -30,6 +30,7 @@ public class Tornado : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
         //setting input values
         if (start.playing && !global.paused)
         {
@@ -90,15 +91,19 @@ public class Tornado : MonoBehaviour
     }
     void loseObject()
     {
-        int rand = Random.Range(0, objects.Count);
-        ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
-        List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
-        int randX = randFlyList[Random.Range(0, randFlyList.Count)];
-        int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
-        exitOb.taken = false; // object is no longer taken
-        exitOb.exitCooldown = 3f; // cooldown before being picked up again
-        exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
-        objects.RemoveAt(rand); // remove object from list
+        for (int i = 0; i <= objects.Count / 4; i++)
+        {
+            int rand = Random.Range(0, objects.Count);
+            ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
+            List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
+            int randX = randFlyList[Random.Range(0, randFlyList.Count)];
+            int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
+            exitOb.taken = false; // object is no longer taken
+            exitOb.exitCooldown = 3f; // cooldown before being picked up again
+            exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
+            objects.RemoveAt(rand); // remove object from list
+        }
+        
         //GameObject h = Instantiate(hitEffect, tornadoCenter.position, Quaternion.identity);
         //Destroy(h, 0.6f);
     }

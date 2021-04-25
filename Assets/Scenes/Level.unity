@@ -35762,6 +35762,7 @@ MonoBehaviour:
   playing: 0
   keyPress: 0
   main: 1
+  test: 0
   Rotator: {fileID: 941977363}
   startCam: {fileID: 2008330301}
   PlayCam: {fileID: 1630986526}
@@ -42035,7 +42036,7 @@ GameObject:
   - component: {fileID: 1630986525}
   - component: {fileID: 1630986524}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Level Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
