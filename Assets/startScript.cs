@@ -50,7 +50,9 @@ public class startScript : MonoBehaviour
     {
         Invoke("mainOff", 0.5f);
         //Remove Main menu
-        SceneManager.UnloadSceneAsync("Main");
+        //SceneManager.UnloadSceneAsync("Main");
+        //End tutorial
+        SceneManager.UnloadSceneAsync("Tutorial");
         startImage.SetActive(true);
         //blinking text at start
         StartCoroutine(textBlink());

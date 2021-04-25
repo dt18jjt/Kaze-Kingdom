@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class mainScript : MonoBehaviour
 {
@@ -8,11 +9,14 @@ public class mainScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        start = GameObject.Find("G").GetComponent<startScript>();
+        //start = GameObject.Find("G").GetComponent<startScript>();
+
     }
     public void Play()
     {
-        start.levelStart();
+        //start.levelStart();
+        SceneManager.LoadScene("Tutorial", LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync("Main");
     }
     public void Exit()
     {
