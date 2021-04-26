@@ -128,7 +128,7 @@ MonoBehaviour:
   forceCap: 700
   forceAdd: 25
   forceMax: 900
-  sizeAdd: 0.05
+  sizeAdd: 0.07
   scoreAdd: 500
   exitCooldown: 0
   mass: 0

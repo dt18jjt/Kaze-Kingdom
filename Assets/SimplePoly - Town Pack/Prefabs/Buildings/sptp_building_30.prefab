@@ -126,9 +126,9 @@ MonoBehaviour:
   taken: 0
   large: 1
   vehicle: 0
-  forceCap: 1000
+  forceCap: 1200
   forceAdd: 20
-  forceMax: 1300
+  forceMax: 1500
   sizeAdd: 0.15
   scoreAdd: 5000
   exitCooldown: 0

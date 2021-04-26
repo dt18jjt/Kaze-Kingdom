@@ -126,7 +126,7 @@ MonoBehaviour:
   large: 1
   vehicle: 0
   forceCap: 1000
-  forceAdd: 20
+  forceAdd: 40
   forceMax: 1300
   sizeAdd: 0.15
   scoreAdd: 5000

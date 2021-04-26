@@ -16,7 +16,7 @@ public class Tornado : MonoBehaviour
     Vector2 inputs;
     public Vector3 newCamScale, newScale, realCamScale, realScale;
     public GameObject flashEffect, slowEffect;
-    public AudioClip pickup;
+    public AudioClip pickup, struck;
     CameraFollow cameraFollow;
     startScript start;
     Global global;
@@ -71,7 +71,6 @@ public class Tornado : MonoBehaviour
                 cam.transform.localScale = cam.transform.localScale;
                 //hero = null;
                 camScale = false;
-
             }
 
         }
@@ -84,7 +83,6 @@ public class Tornado : MonoBehaviour
                 transform.localScale = transform.localScale;
                 //hero = null;
                 Scale = false;
-
             }
 
         }
@@ -96,22 +94,20 @@ public class Tornado : MonoBehaviour
     }
     public void loseObject()
     {
+        GetComponent<AudioSource>().PlayOneShot(struck);
         for (int i = 0; i <= objects.Count / 4; i++)
         {
             int rand = Random.Range(0, objects.Count);
             ObjectScript exitOb = objects[rand].gameObject.GetComponent<ObjectScript>(); // get random object from list
-            score -= exitOb.scoreAdd; //take away score
             List<int> randFlyList = new List<int> { -700, -500, 500, 700 };
             int randX = randFlyList[Random.Range(0, randFlyList.Count)];
             int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
             exitOb.taken = false; // object is no longer taken
             exitOb.exitCooldown = 3f; // cooldown before being picked up again
+            score -= exitOb.scoreAdd; //take away score
             exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
             objects.RemoveAt(rand); // remove object from list
         }
-        
-        //GameObject h = Instantiate(hitEffect, tornadoCenter.position, Quaternion.identity);
-        //Destroy(h, 0.6f);
     }
     private void OnTriggerEnter(Collider other)
     {
