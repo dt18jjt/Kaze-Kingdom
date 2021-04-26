@@ -11,6 +11,7 @@ public class Global : MonoBehaviour
     public bool comboOn = true, paused;
     public Text timeText, comboText, comboAddText;
     public Image cmbfillImg, timfillImg;
+    public GameObject dstr, dstr2;
     startScript start;
     Tornado player;
     // Start is called before the first frame update
@@ -22,7 +23,16 @@ public class Global : MonoBehaviour
        comboText.enabled = false;
        comboAddText.enabled = false;
        start = GetComponent<startScript>();
-        player = GameObject.Find("Player").GetComponent<Tornado>();
+       player = GameObject.Find("Player").GetComponent<Tornado>();
+       //dstr.SetActive(false);
+       //dstr2.SetActive(false);
+       if (!start.test)
+       {
+          dstr.SetActive(false);
+          dstr2.SetActive(false);
+        }
+        //Show diasters after 3 minutes
+        StartCoroutine(Diasters());
 
     }
     void DisplayTime(float timeToDisplay)
@@ -85,6 +95,7 @@ public class Global : MonoBehaviour
                 
                 
         }
+        
     }
     public IEnumerator showCombo()
     {
@@ -94,6 +105,17 @@ public class Global : MonoBehaviour
         yield return new WaitForSeconds(1f);
         comboAddText.enabled = false;
     }
-   
+    public IEnumerator Diasters()
+    {
+        while (minutes <= 3 && !start.test)
+        {
+            dstr.SetActive(true);
+            dstr2.SetActive(false);
+            yield return new WaitForSeconds(30f);
+            dstr.SetActive(false);
+            dstr2.SetActive(true);
+            yield return new WaitForSeconds(30f);
+        }
+    }
 
 }

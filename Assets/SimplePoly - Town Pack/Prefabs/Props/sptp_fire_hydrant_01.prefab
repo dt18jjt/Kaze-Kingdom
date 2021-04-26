@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taken: 0
-  large: 0
+  large: 1
   vehicle: 0
   forceCap: 400
   forceAdd: 20
