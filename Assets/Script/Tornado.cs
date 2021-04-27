@@ -8,7 +8,7 @@ public class Tornado : MonoBehaviour
 {
     public Transform tornadoCenter;
     public float pullForce, refreshRate, score, cmbScore = 0f, shockCooldown = 0f, tremorCooldown = 0f, avalancheCooldown = 0f, reverseNum, speed, normalSpeed;
-    public bool camScale, Scale, collide;
+    public bool camScale, Scale, collide, added = false;
     [SerializeField]
     public GameObject cam;
     public Transform camPos;
@@ -91,10 +91,13 @@ public class Tornado : MonoBehaviour
         {
             StartCoroutine(End());
         }
+        if (score <= 0)
+            score = 0;
     }
     public void loseObject()
     {
         GetComponent<AudioSource>().PlayOneShot(struck);
+        score -= 2000;
         for (int i = 0; i <= objects.Count / 4; i++)
         {
             int rand = Random.Range(0, objects.Count);
@@ -104,8 +107,9 @@ public class Tornado : MonoBehaviour
             int randZ = randFlyList[Random.Range(0, randFlyList.Count)];
             exitOb.taken = false; // object is no longer taken
             exitOb.exitCooldown = 3f; // cooldown before being picked up again
-            score -= exitOb.scoreAdd; //take away score
+            //score -= exitOb.scoreAdd; //take away score
             exitOb.gameObject.GetComponent<Rigidbody>().AddForce(randX, 500, randZ);
+            exitOb.gameObject.GetComponent<BoxCollider>().enabled = true;
             objects.RemoveAt(rand); // remove object from list
         }
     }
@@ -172,6 +176,12 @@ public class Tornado : MonoBehaviour
     }
     IEnumerator End()
     {
+        //add ongoing combo at end
+        if (!added)
+        {
+            cmbScore += global.comboAdd;
+            added = true;
+        }
         start.playing = false;
         start.fadeIn.SetActive(true);
         yield return new WaitForSeconds(1.5f);

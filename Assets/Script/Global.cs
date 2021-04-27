@@ -62,11 +62,14 @@ public class Global : MonoBehaviour
             comboText.text = comboNum.ToString();
             comboTime -= Time.deltaTime;
             cmbfillImg.fillAmount = comboTime / comboTimeAmt;
-            if(comboTime <= 0)
+            //add to combo
+            if(comboNum > 1)
+                comboAdd = comboNum * 100;
+            //End of combo;
+            if (comboTime <= 0)
             {
                 if (comboNum > 1)
                 {
-                    comboAdd = comboNum * 100;
                     StartCoroutine(showCombo());
                 }
                 comboOn = false;

@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class tutorialScript : MonoBehaviour
 {
     public int tNum = 0;
-    public GameObject next, back, play, mov, cam, obj, prog, dstr;
+    public GameObject next, back, play, mov, cam, obj, prog, dstr, pse;
     private EventSystem system;
     startScript start;
     
@@ -30,6 +30,7 @@ public class tutorialScript : MonoBehaviour
                 obj.SetActive(false);
                 prog.SetActive(false);
                 dstr.SetActive(false);
+                pse.SetActive(false);
                 break;
             case 1:
                 play.SetActive(false);
@@ -38,6 +39,7 @@ public class tutorialScript : MonoBehaviour
                 obj.SetActive(false);
                 prog.SetActive(false);
                 dstr.SetActive(false);
+                pse.SetActive(false);
                 break;
             case 2:
                 play.SetActive(false);
@@ -46,6 +48,7 @@ public class tutorialScript : MonoBehaviour
                 obj.SetActive(true);
                 prog.SetActive(false);
                 dstr.SetActive(false);
+                pse.SetActive(false);
                 break;
             case 3:
                 play.SetActive(false);
@@ -54,14 +57,25 @@ public class tutorialScript : MonoBehaviour
                 obj.SetActive(false);
                 prog.SetActive(true);
                 dstr.SetActive(false);
+                pse.SetActive(false);
                 break;
             case 4:
-                play.SetActive(true);
+                play.SetActive(false);
                 mov.SetActive(false);
                 cam.SetActive(false);
                 obj.SetActive(false);
                 prog.SetActive(false);
                 dstr.SetActive(true);
+                pse.SetActive(false);
+                break;
+            case 5:
+                play.SetActive(true);
+                mov.SetActive(false);
+                cam.SetActive(false);
+                obj.SetActive(false);
+                prog.SetActive(false);
+                dstr.SetActive(false);
+                pse.SetActive(true);
                 break;
         }
     }
@@ -71,7 +85,7 @@ public class tutorialScript : MonoBehaviour
     }
     public void Next()
     {
-        if(tNum < 4)
+        if(tNum < 5)
             tNum++;
     }
     public void Back()
